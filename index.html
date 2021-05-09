@@ -6,19 +6,19 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Get notification for vaccine"
+      content="Get instant notification for CoWIN vaccine"
     />
-    <title>Cowin vaccine | Get notification</title>
+    <title>CoWIN Vaccine Notification</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body style="padding: 100px;">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>You need to enable JavaScript in your browser to run this app.</noscript>
     <div>
       <select id="states" class="form-select" onchange="getDistricts()">
-        <option selected>States</option>
+        <option selected>Select your State</option>
       </select>
       <select id="districts" class="form-select">
-        <option selected>Districts</option>
+        <option selected>Select your District</option>
       </select>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="age18">
@@ -32,7 +32,7 @@
           45+
         </label>
       </div>
-      <span>how many hour difference to get notification</span>
+      <span>Set after how many minutes interval, you want to keep on getting notified</span>
       <select id="interval" class="form-select">
         <option selected>1</option>
         <option>3</option>
@@ -49,12 +49,12 @@
       </select>
       <br>
       <br>
-      <button type="button" class="btn btn-primary" onclick="getNotification()">Get Notification</button>
+      <button type="button" class="btn btn-primary" onclick="getNotification()">Enable Notification</button>
       <br>
       <br>
       <br>
 
-      <button type="button" class="btn btn-danger" onclick="unSubscribe()">Unsubscribe</button>
+      <button type="button" class="btn btn-danger" onclick="unSubscribe()">Disable Notification</button>
     </div>
     <script>
       fetch("https://cdn-api.co-vin.in/api/v2/admin/location/states", {
@@ -97,7 +97,7 @@
           for(let registration of registrations) {
             registration.unregister()
           } })
-          alert('To subscribe again you need to refresh the page');
+          alert('To enable notification again, you will need to refresh the page');
       }
       function getNotification() {
         if(document.getElementById('states').value === 'States' || document.getElementById('districts').value==='Districts'){

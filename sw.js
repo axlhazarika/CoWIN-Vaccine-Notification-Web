@@ -15,7 +15,7 @@ self.addEventListener('message', function(event){
   var age45 = data.ageLimits[0];
   var age18 = data.ageLimits[1];
   intervalId = setInterval(() => {
-    fetch(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${data.district}&date=${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()}`, {
+    fetch(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByDistrict?district_id=${data.district}&date=${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()}`, {
       "body": null,
       "method": "GET",
     }).then(res => {
@@ -24,15 +24,15 @@ self.addEventListener('message', function(event){
           center.sessions.forEach(session => {
             if(age18 && session.min_age_limit === 18 && session.available_capacity > 0){
               console.log(center)
-              self.registration.showNotification('Slot Available', {
-                body: 'please register from cowin website'
+              self.registration.showNotification('Vaccine Slots Available', {
+                body: 'please register from official cowin website or the mobile app'
               });
               return;
             }
             else if(age45 && session.min_age_limit === 45 && session.available_capacity > 0){
               console.log(center)
-              self.registration.showNotification('Slot Available', {
-                body: 'please register from cowin website'
+              self.registration.showNotification('Vaccine Slots Available', {
+                body: 'please register from official cowin website or the mobile app'
               });
               return;
             }
@@ -40,6 +40,6 @@ self.addEventListener('message', function(event){
         });
       })
     });
-  },3600000*parseInt(data.interval))
+  },60000*parseInt(data.interval))
 
 });
